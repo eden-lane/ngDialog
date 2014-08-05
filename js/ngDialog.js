@@ -63,6 +63,7 @@
 					},
 
 					closeDialog: function ($dialog) {
+                        var data = angular.copy($dialog.scope().data) || {};
 						var id = $dialog.attr('id');
 						if (typeof window.Hammer !== 'undefined') {
 							window.Hammer($dialog[0]).off('tap', closeByDocumentHandler);
@@ -99,7 +100,9 @@
 							defers[id].resolve({
 								id: id,
 								$dialog: $dialog,
-								remainingDialogs: dialogsCount
+								remainingDialogs: dialogsCount,
+                                data: data
+
 							});
 							delete defers[id];
 						}
